@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Application context definition for AmazeIndia datasource.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/data/mongo
+         http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+         http://www.springframework.org/schema/util 
+         http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+	 <!-- <beans profile="test">
+		<context:property-placeholder location="classpath:spring/amazeindia.conf"/>
+		
+		<bean id="mongoRef" class="com.github.panthers.efstore.util.InMemoryMongoServerForTest">
+			<property name="randomPort" value="true" />
+		</bean>
+		
+		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef"/>
+	</beans>-->
+	
+	<beans profile="production">
+		<!-- Load properties for efstore -->
+		<context:property-placeholder location="file:${AMAZEINDIA}/conf/amazeindia.conf"/>
+		
+		<!-- Mongo DB -->
+	    <mongo:mongo id="mongoRef" host="${mongo.host}" port="${mongo.port}" replica-set="${mongo.replicaset}" />
+		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef" username="${mongo.username}" password="${mongo.password}" />
+	</beans>
+	
+	<beans profile="production,test">
+		<!-- Mongo Template -->
+		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		</bean>
+		
+		<!-- Mongo repository package -->
+		<mongo:repositories base-package="com.packages.amazeIndia.repository" />
+	</beans>
+	
+</beans>
