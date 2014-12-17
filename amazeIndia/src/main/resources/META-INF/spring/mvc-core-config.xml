@@ -25,6 +25,7 @@
         - POJOs labeled with the @Controller and @Service annotations are auto-detected.
     -->
     <context:component-scan base-package="com.packages.amazeIndia.controller"/>
+    <context:component-scan base-package="com.packages.amazeIndia.exceptions"/>
     
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -42,9 +43,9 @@
     <!--
         - Message source for this context, loaded from localized "messages_xx" files.
         - Files are stored inside src/main/resources
-    -->
+    
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:basename="messages/messages"/>
+          p:basename="messages/messages"/>-->
 
     <!--
         - This bean resolves specific types of exceptions to corresponding logical 
@@ -57,5 +58,24 @@
         <property name="warnLogCategory" value="warn"/>
         <!-- needed otherwise exceptions won't be logged anywhere -->
     </bean>
+    
+    <!-- Configurations for support to i18n and L10n -->
+    
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:locale/messages" />
+	    <property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	
+	<mvc:interceptors>
+	     <mvc:interceptor>
+	       <mvc:mapping path="/**"/>
+		   <bean id="localeChangeInterceptor"  class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		    	 <property name="paramName" value="lang" />
+		   </bean>
+	     </mvc:interceptor>
+ 	</mvc:interceptors>
+ 
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/>
+    
 
 </beans>
