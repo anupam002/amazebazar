@@ -1,5 +1,9 @@
 package com.packages.amazeIndia.controller;
 
+import java.util.LinkedList;
+import java.util.Locale;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.packages.amazeIndia.document.Users;
+import com.packages.amazeIndia.document.Users.Gender;
+import com.packages.amazeIndia.document.Users.Role;
+import com.packages.amazeIndia.document.Users.SecurityQuestion;
+import com.packages.amazeIndia.document.Users.UserTitle;
 import com.packages.amazeIndia.service.AccountService;
 
 /**
@@ -38,5 +46,15 @@ public class RestAccountDetail {
 	public @ResponseBody Users getAccountDetails(@RequestParam("userId") String userId){
 		Users dataUser = accountService.findByUserId(userId);
 		return dataUser;
+	}
+	
+	@RequestMapping(value="/saveUser",method={RequestMethod.POST,RequestMethod.GET})
+	public @ResponseBody Users saveUser(@RequestParam("userId") String userId){
+		LinkedList<ObjectId> shippingAddress = new LinkedList<ObjectId>();
+		LinkedList<ObjectId> contactAddresses = new LinkedList<ObjectId>();
+		Users userData = accountService.saveUser(Role.FULL_ADMIN, UserTitle.MR, Gender.MALE_GENDER, SecurityQuestion.Q1, SecurityQuestion.Q2, userId, "anupam002@gmail.com", "welcome", true,
+				false, System.currentTimeMillis(), System.currentTimeMillis(), System.currentTimeMillis(), System.currentTimeMillis(), Locale.getDefault(), "Anupam",
+				"", "Srivastava", "MVN", "Blue", shippingAddress, contactAddresses);
+		return userData;
 	}
 }
