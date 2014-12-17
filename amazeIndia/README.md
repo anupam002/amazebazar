@@ -7,7 +7,7 @@ Download wildfly 8.1.0 [here](http://download.jboss.org/wildfly/8.1.0.Final/wild
 
 #### Sample wildfly setting system property on wildfly/standalone/configuration/standalone.xml
 	<system-properties>
-        <property name="AMAZEINDIA" value="/home/amazeindia"/>
+        <property name="AMAZEINDIA" value="E:\home\amazeindia"/>
 	</system-properties>
 	
 #### EFSTORE Directory Structure
@@ -32,6 +32,6 @@ Download wildfly 8.1.0 [here](http://download.jboss.org/wildfly/8.1.0.Final/wild
 
 Once downloaded, the application can be locally deployed onto wildfly 8.1.0
 
-Which will start a Tomcat server you can access at: http://localhost:8080/amazeindia/
+Which will start a Tomcat server you can access at: http://localhost:8080/amazeIndia/
 
 
