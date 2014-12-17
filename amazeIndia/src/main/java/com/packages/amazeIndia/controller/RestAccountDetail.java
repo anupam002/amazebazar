@@ -52,7 +52,7 @@ public class RestAccountDetail {
 	public @ResponseBody Users saveUser(@RequestParam("userId") String userId){
 		LinkedList<ObjectId> shippingAddress = new LinkedList<ObjectId>();
 		LinkedList<ObjectId> contactAddresses = new LinkedList<ObjectId>();
-		Users userData = accountService.saveUser(Role.FULL_ADMIN, UserTitle.MR, Gender.MALE_GENDER, SecurityQuestion.Q1, SecurityQuestion.Q2, userId, "anupam002@gmail.com", "welcome", true,
+		Users userData = accountService.saveUser(Role.FULL_ADMIN, UserTitle.MR, Gender.MALE_GENDER, SecurityQuestion.Q1, SecurityQuestion.Q2, userId, "anupam005@gmail.com", "welcome", true,
 				false, System.currentTimeMillis(), System.currentTimeMillis(), System.currentTimeMillis(), System.currentTimeMillis(), Locale.getDefault(), "Anupam",
 				"", "Srivastava", "MVN", "Blue", shippingAddress, contactAddresses);
 		return userData;
