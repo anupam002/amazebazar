@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.packages.amazeIndia.document.Users;
-import com.packages.amazeIndia.repositry.UsersRepositry;
+import com.packages.amazeIndia.repository.UsersRepository;
 import com.packages.amazeIndia.service.AccountService;
 
 /**
@@ -26,18 +26,21 @@ import com.packages.amazeIndia.service.AccountService;
 public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
-	private UsersRepositry usersRepositry;
+	private UsersRepository usersRepository;
 
+	@Override
 	public Users findByUserId(String userId) {
-		return usersRepositry.findOne(userId);
+		return usersRepository.findOne(userId);
 	}
 
+	@Override
 	public Users findUserByEmailId(String emailId) {
-		return usersRepositry.findUserByEmailId(emailId);
+		return usersRepository.findUserByEmailId(emailId);
 	}
 
+	@Override
 	public Users saveUser(Users user) {
-		return usersRepositry.save(user);
+		return usersRepository.save(user);
 	}
 
 }

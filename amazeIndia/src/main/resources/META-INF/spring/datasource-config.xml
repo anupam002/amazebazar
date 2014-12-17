@@ -28,23 +28,19 @@
 		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef"/>
 	</beans>-->
 	
-	<beans profile="production">
 		<!-- Load properties for efstore -->
 		<context:property-placeholder location="file:${AMAZEINDIA}/conf/amazeindia.conf"/>
 		
 		<!-- Mongo DB -->
 	    <mongo:mongo id="mongoRef" host="${mongo.host}" port="${mongo.port}" replica-set="${mongo.replicaset}" />
 		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef" username="${mongo.username}" password="${mongo.password}" />
-	</beans>
 	
-	<beans profile="production,test">
 		<!-- Mongo Template -->
 		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 		</bean>
 		
 		<!-- Mongo repository package -->
-		<mongo:repositories base-package="com.packages.amazeIndia.repository" />
-	</beans>
+		<mongo:repositories base-package="com.packages.amazeIndia.repository"/>
 	
 </beans>

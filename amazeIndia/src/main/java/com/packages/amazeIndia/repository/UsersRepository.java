@@ -1,4 +1,4 @@
-package com.packages.amazeIndia.repositry;
+package com.packages.amazeIndia.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -21,7 +21,7 @@ import com.packages.amazeIndia.document.Users;
  * limitations under the License.
  */
 
-public interface UsersRepositry extends MongoRepository<Users, String>{
+public interface UsersRepository extends MongoRepository<Users, String>{
 	@Query("{'emailId' : 0}")
 	Users findUserByEmailId(String emailId);
 
