@@ -415,7 +415,22 @@
 		</dependency>
          
        </dependencies>
-
-    <!-- all Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
- 	
+ 	   <!-- Profile Configuration 
+ 	   <profiles>
+ 	   		<profile>
+ 	   			<id>production</id>
+ 	   			<activation>
+ 	   				<activeByDefault>true</activeByDefault>
+ 	   			</activation>
+ 	   			<properties>
+ 	   				<build.profile.id>production</build.profile.id>
+ 	   			</properties>
+ 	   		</profile>
+ 	   		<profile>
+ 	   			<id>test</id>
+ 	   			<properties>
+ 	   				<build.profile.id>test</build.profile.id>
+ 	   			</properties>
+ 	   		</profile>
+ 	   </profiles>-->
 </project>

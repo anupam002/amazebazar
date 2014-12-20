@@ -1,5 +1,22 @@
-package com.packages.amazeIndia.controller;
+/**
+ * 
+ * @author asrivastava
+ * Copyright 2014 Amaze India Pvt. Ltd. All Rights reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.packages.amazeIndia.web;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Locale;
 
@@ -18,24 +35,9 @@ import com.packages.amazeIndia.document.Users.Gender;
 import com.packages.amazeIndia.document.Users.Role;
 import com.packages.amazeIndia.document.Users.SecurityQuestion;
 import com.packages.amazeIndia.document.Users.UserTitle;
+import com.packages.amazeIndia.exceptions.MailExceptionHandler;
 import com.packages.amazeIndia.service.AccountService;
-
-/**
- * 
- * @author asrivastava
- * Copyright 2014 Amaze India Pvt. Ltd. All Rights reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+import com.packages.amazeIndia.service.MailSendingService;
 
 
 @RestController
@@ -47,10 +49,24 @@ public class RestAccountDetail {
 	@Autowired
 	ReloadableResourceBundleMessageSource messageSource;
 	
+	@Autowired
+	MailSendingService mailsendingService;
+	
 	@RequestMapping(value="/accDetail",method={RequestMethod.POST,RequestMethod.GET})
 	@JsonView(Users.class)
 	public Users getAccountDetails(@RequestParam("userId") String userId){
 		Users dataUser = accountService.findByUserId(userId);
+		try {
+			mailsendingService.sendPreConfiguredMail("Welcome to amazeIndia Mail Implementation Preconfigured", "anupam.srivastava@amazebazaar.com", "amit.sharma@amazebazaar.com");
+			ArrayList<String> toArr = new ArrayList<String>();
+			toArr.add("anupam.srivastava@amazebazaar.com");
+			toArr.add("amit.sharma@amazebazaar.com");
+			toArr.add("pankaj.samadhiya@amazebazaar.com");
+			toArr.add("akhil.garg@amazebazaar.com");
+			mailsendingService.sendMail(toArr, "Test Mail", "Welcome to amazeIndia Mail Implementation", null, null, "no-reply@amazebazaar.com", null);
+		} catch (MailExceptionHandler e) {
+			
+		}
 		return dataUser;
 	}
 	

@@ -22,24 +22,23 @@
     
     <!-- Creating the JavaMailSender Bean -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="${smtp.host}"/>
-        <property name="port" value="587"/>
-        <property name="username" value="${smtp.username}"/>
-        <property name="password" value="${smtp.password}"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.auth">${smtp.auth}</prop>
-                <prop key="mail.smtp.starttls.enable">${smtp.starttls.enabled}</prop>
-                <prop key="mail.debug">${amazeindia.debug}</prop>
-            </props>
-        </property>
-    </bean>
+	<property name="host" value="${smtp.host}" />
+	<property name="port" value="${smtp.port}" />
+	<property name="protocol" value="${smtp.protocol}" />
+	<property name="username" value="${smtp.username}"/>
+	<property name="password" value="${smtp.password}"/>
+	<property name="javaMailProperties">
+		<props>
+			<prop key="mail.smtps.auth">${smtp.auth}</prop>
+			<prop key="mail.smtps.starttls.enable">${smtp.starttls.enabled}</prop>
+			<prop key="mail.smtps.debug">${amazeindia.debug}</prop>
+		</props>
+	</property>
+</bean>
 	
 	<!-- pre-configured test mail -->
-	<bean id="testMailMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="subject" value="SMTP Settings"/>
-        <property name="text" value="SMTP Settings for the server seems to be OK"/>
+	<bean id="preconfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="no-reply@amazebazaar.com"></property>
     </bean>
      
     <!-- pre-configured emergency message -->

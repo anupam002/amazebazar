@@ -24,7 +24,7 @@
     <!--
         - POJOs labeled with the @Controller and @Service annotations are auto-detected.
     -->
-    <context:component-scan base-package="com.packages.amazeIndia.controller"/>
+    <context:component-scan base-package="com.packages.amazeIndia.web"/>
     <context:component-scan base-package="com.packages.amazeIndia.exceptions"/>
     
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -41,13 +41,6 @@
 
     <mvc:view-controller path="/" view-name="welcome" />
     <!--
-        - Message source for this context, loaded from localized "messages_xx" files.
-        - Files are stored inside src/main/resources
-    
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:basename="messages/messages"/>-->
-
-    <!--
         - This bean resolves specific types of exceptions to corresponding logical 
         - view names for error views.
     -->
@@ -59,7 +52,9 @@
         <!-- needed otherwise exceptions won't be logged anywhere -->
     </bean>
     
-    <!-- Configurations for support to i18n and L10n -->
+    <!-- Configurations for support to i18n and L10n 
+    	Message source for this context, loaded from localized "messages_xx" files.
+    -->
     
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 	    <property name="basename" value="classpath:locale/messages" />
