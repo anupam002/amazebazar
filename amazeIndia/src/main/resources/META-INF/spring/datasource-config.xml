@@ -18,23 +18,28 @@
          http://www.springframework.org/schema/util/spring-util.xsd">
 
 	
-	 <!-- <beans profile="test">
-		<context:property-placeholder location="classpath:spring/amazeindia.conf"/>
+	<beans profile="test">
+		<!-- Load properties for amazeIndia -->
+		<context:property-placeholder location="classpath:META-INF/spring/amazeindia.conf"/>
 		
-		<bean id="mongoRef" class="com.github.panthers.efstore.util.InMemoryMongoServerForTest">
+		<!-- Start Mongo DB server for tests -->
+		<bean id="mongoRef" class="com.packages.amazeIndia.util.InMemoryMongoServerForTest">
 			<property name="randomPort" value="true" />
 		</bean>
-		
+		<!-- Mongo DB -->
 		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef"/>
-	</beans>-->
+	</beans>
 	
-		<!-- Load properties for efstore -->
+	<beans profile="production">
+		<!-- Load properties for amazeIndia -->
 		<context:property-placeholder location="file:${AMAZEINDIA}/conf/amazeindia.conf"/>
 		
 		<!-- Mongo DB -->
 	    <mongo:mongo id="mongoRef" host="${mongo.host}" port="${mongo.port}" replica-set="${mongo.replicaset}" />
 		<mongo:db-factory id="mongoDbFactory" dbname="${mongo.db}" mongo-ref="mongoRef" username="${mongo.username}" password="${mongo.password}" />
+	</beans>
 	
+	<beans profile="production,test">
 		<!-- Mongo Template -->
 		<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 			<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
@@ -42,5 +47,5 @@
 		
 		<!-- Mongo repository package -->
 		<mongo:repositories base-package="com.packages.amazeIndia.repository"/>
-	
+	</beans>
 </beans>
