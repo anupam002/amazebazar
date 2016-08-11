@@ -63,7 +63,7 @@ public class RestAccountDetail {
 			toArr.add("amit.sharma@amazebazaar.com");
 			toArr.add("pankaj.samadhiya@amazebazaar.com");
 			toArr.add("akhil.garg@amazebazaar.com");
-			mailsendingService.sendMail(toArr, "Test Mail", "Welcome to amazeIndia Mail Implementation", null, null, "no-reply@amazebazaar.com", null);
+			mailsendingService.sendMail(toArr, "Test Mail by Amaze india", "Welcome to amazeIndia Mail Implementation", null, null, "no-reply@amazebazaar.com", null);
 		} catch (MailExceptionHandler e) {
 			
 		}
