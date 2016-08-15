@@ -57,7 +57,7 @@ public class AccountServiceTests extends AbstractAmazePathTests {
 				false, System.currentTimeMillis(), System.currentTimeMillis(), System.currentTimeMillis(), 
 				System.currentTimeMillis(), Locale.getDefault(), "Anupam",
 				"", "Srivastava", "MVN", "Blue", shippingAddress, contactAddresses);
-		
+		// Test commit for review test
 		Assert.assertEquals("Jayant", accountService.findByUserId("anupam007").getFirstName());
 		Assert.assertEquals("panther", accountService.findUserByEmailId("anupam.srivastava@gmail.com").getUserId());
 	}
